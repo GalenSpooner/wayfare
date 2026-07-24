@@ -616,8 +616,8 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       <span class="sub">Tap a corridor to search it directly &rarr;</span>
     </div>
     <div class="corridor-map-wrap">
-      <svg class="corridor-map" viewBox="0 0 320 400" role="img" aria-label="Simplified map of Northern California showing the five Wayfare corridors">
-        <path class="map-land" d="M70,15 L55,60 Q45,90 55,120 Q75,148 66,165 L50,200 Q40,240 55,270 L45,310 Q50,345 75,360 L100,375 L170,378 L235,345 Q265,300 270,250 Q275,190 265,140 Q255,90 235,55 L190,20 Z"/>
+      <svg class="corridor-map" viewBox="0 0 320 310" role="img" aria-label="Simplified map of Northern California showing the five Wayfare corridors">
+        <path class="map-land" d="M51.2,18.2 L75.3,18.0 L113.1,18.6 L142.3,18.6 L142.4,80.7 L142.3,126.0 L178.5,158.3 L212.8,189.9 L239.8,215.6 L259.2,234.7 L293.5,269.4 L293.5,274.0 L298.1,279.8 L302.0,289.3 L154.8,290.5 L145.8,290.7 L138.4,288.3 L129.0,289.3 L124.0,284.6 L125.1,274.5 L123.4,273.0 L124.5,265.9 L117.1,260.6 L116.8,253.3 L114.0,252.9 L109.4,246.7 L106.1,245.3 L104.7,241.3 L93.9,226.6 L88.8,222.3 L87.8,210.7 L89.9,211.7 L91.9,204.8 L87.9,198.5 L83.0,199.3 L76.5,193.6 L74.2,189.1 L74.6,184.8 L71.4,179.1 L71.4,169.6 L76.7,169.6 L74.5,156.5 L72.2,157.9 L71.7,164.3 L66.2,165.7 L59.5,160.8 L58.4,152.4 L54.1,145.7 L48.4,141.6 L45.3,136.8 L37.0,127.6 L38.4,124.9 L34.5,112.9 L36.2,106.2 L33.7,96.2 L26.5,86.4 L19.4,80.9 L18.0,74.4 L25.1,58.7 L26.5,53.4 L25.1,49.2 L27.7,38.4 L25.4,28.6 L22.3,26.3 L23.6,18.4 L51.2,18.2 Z"/>
         <g id="mapRoutes"></g>
         <g id="mapPoints"></g>
       </svg>
@@ -944,17 +944,18 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   }).join('');
 
   // schematic corridor map — approximate relative positions on the simplified NorCal outline
+  // real lon/lat, equirectangular-projected onto the map-land outline above (same source geometry)
   var MAP_POINTS = {
-    'Napa Valley, CA':          { x: 98,  y: 108, label: 'Napa' },
-    'SFO airport':              { x: 90,  y: 154, label: 'SF Bay Area' },
-    'South Lake Tahoe, CA':     { x: 205, y: 150, label: 'Lake Tahoe' },
-    'Reno-Tahoe airport':       { x: 252, y: 140, label: 'Reno' },
-    'Davis, CA':                { x: 136, y: 126, label: 'Davis' },
-    'Sacramento airport':       { x: 152, y: 106, label: 'Sacramento' },
-    'Santa Cruz, CA':           { x: 68,  y: 218, label: 'Santa Cruz' },
-    'San Jose airport':         { x: 102, y: 164, label: null },
-    'Mammoth Lakes, CA':        { x: 212, y: 254, label: 'Mammoth Lakes' },
-    'Mammoth Yosemite airport': { x: 230, y: 274, label: null }
+    'Napa Valley, CA':          { x: 77.9,  y: 151.2, label: 'Napa' },
+    'SFO airport':              { x: 75.3,  y: 175.5, label: 'SF Bay Area' },
+    'San Jose airport':         { x: 87.9,  y: 184.7, label: null },
+    'Sacramento airport':       { x: 97.5,  y: 136.9, label: 'Sacramento' },
+    'Davis, CA':                { x: 93.3,  y: 142.3, label: 'Davis' },
+    'South Lake Tahoe, CA':     { x: 142.9, y: 128.2, label: 'Lake Tahoe' },
+    'Reno-Tahoe airport':       { x: 148.8, y: 108.1, label: 'Reno' },
+    'Santa Cruz, CA':           { x: 85.1,  y: 198.7, label: 'Santa Cruz' },
+    'Mammoth Lakes, CA':        { x: 171.3, y: 174.5, label: 'Mammoth Lakes' },
+    'Mammoth Yosemite airport': { x: 175.0, y: 175.4, label: null }
   };
   var MAP_COLORS = ['var(--coral)', 'var(--price)'];
   var mapRoutesEl = document.getElementById('mapRoutes');
