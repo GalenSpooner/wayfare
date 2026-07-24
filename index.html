@@ -120,7 +120,9 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 
 /* ---- shared search components ---- */
 .search-panel{ background:var(--card); border-radius:24px; box-shadow:0 4px 20px rgba(24,24,37,0.08); padding:0.6rem; margin:0 auto 1rem; max-width:820px; text-align:left; }
-.search-form{ display:grid; grid-template-columns:1.4fr auto 1.4fr 1fr 1fr auto; gap:0.35rem; align-items:stretch; }
+.search-form-primary{ display:grid; grid-template-columns:1.6fr 1.6fr auto; gap:0.35rem; align-items:stretch; }
+.search-form-secondary{ display:grid; grid-template-columns:1fr 1fr; gap:0.35rem; margin-top:0.35rem; max-width:260px; }
+.search-form-secondary .field{ padding:0.6rem 1.1rem; }
 .field{
   padding:0.85rem 1.1rem; border-radius:16px; background:var(--bg); display:flex; flex-direction:column;
   gap:0.22rem; min-width:0; border:1.5px solid transparent; transition:border-color 0.15s ease, background 0.15s ease;
@@ -135,8 +137,6 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 }
 .field select option{ background-color:#ffffff; color:#102a26; }
 .field select:focus,.field input:focus{ outline:none; }
-.swap{ display:flex; align-items:center; justify-content:center; color:var(--ink-faint); font-size:1.15rem; cursor:pointer; border-radius:10px; transition:background 0.15s ease, color 0.15s ease, transform 0.15s ease; }
-.swap:hover{ background:var(--bg); color:var(--coral-ink); transform:rotate(180deg); }
 .search-btn{
   background:var(--coral); color:#fff; border:none; border-radius:16px; font-weight:700; font-size:0.96rem;
   padding:0 2rem; white-space:nowrap; box-shadow:0 4px 0 var(--coral-deep);
@@ -157,16 +157,26 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 }
 
 /* ==================== LANDING VIEW ==================== */
-#view-landing .hero{ max-width:960px; margin:0 auto; padding:3.4rem 1.5rem 1rem; text-align:center; }
+#view-landing .hero{
+  max-width:1180px; margin:0 auto; padding:3.4rem 1.5rem 1.6rem;
+  display:grid; grid-template-columns:1.1fr 0.95fr; gap:2.8rem; align-items:center;
+}
+#view-landing .hero-copy{ text-align:left; }
 #view-landing .hero .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); margin-bottom:1rem; }
 #view-landing .hero .eyebrow .aside{ font-weight:400; color:var(--ink-faint); }
 #view-landing .hero h1{
-  font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:clamp(2.4rem,6.4vw,4rem);
-  line-height:1.04; margin:0 0 1rem; text-wrap:balance;
+  font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:clamp(2.3rem,4.4vw,3.5rem);
+  line-height:1.05; margin:0 0 1rem; text-wrap:balance;
 }
-#view-landing .hero p{ font-size:1.08rem; color:var(--ink-soft); max-width:48ch; margin:0 auto 2.2rem; }
+#view-landing .hero p{ font-size:1.06rem; color:var(--ink-soft); max-width:42ch; margin:0; }
+#view-landing .hero-search .search-panel{ margin:0 0 0.9rem; max-width:none; }
 #view-landing .hero-note{ font-size:0.8rem; color:var(--ink-faint); text-align:center; }
 #view-landing .hero-note b{ color:var(--ink-soft); }
+@media (max-width:900px){
+  #view-landing .hero{ grid-template-columns:1fr; text-align:center; padding-top:2.8rem; }
+  #view-landing .hero-copy{ text-align:center; }
+  #view-landing .hero p{ margin:0 auto; }
+}
 
 .section{ max-width:960px; margin:0 auto; padding:3.2rem 1.5rem; }
 .section-head{ text-align:center; margin-bottom:2.2rem; }
@@ -180,23 +190,16 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .section-intro .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); }
 .section-intro .sub{ color:var(--ink-faint); font-size:0.84rem; }
 
-.annotation{
-  font-family:Georgia,'Iowan Old Style',serif; font-style:italic; color:var(--coral-ink);
-  font-size:0.86rem; transform:rotate(-2deg); display:inline-block; position:relative; margin-bottom:0.3rem;
-}
-.annotation::after{ content:"↴"; margin-left:0.3rem; font-style:normal; }
-
 .stamp-rotate{ display:inline-block; transform:rotate(-4deg); }
 
-.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
-.step{ background:var(--card); border-radius:20px; box-shadow:var(--shadow-card); padding:1.7rem 1.4rem; text-align:center; }
-.step .num{
-  width:2.6rem; height:2.6rem; border-radius:50%; background:var(--coral-soft); color:var(--coral-ink);
-  display:flex; align-items:center; justify-content:center; margin:0 auto 0.8rem;
-  font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.3rem;
-}
-.step h3{ font-size:1.02rem; font-weight:700; margin:0 0 0.5rem; color:var(--ink); }
-.step p{ font-size:0.9rem; color:var(--ink-soft); margin:0; }
+.product-preview{ display:grid; grid-template-columns:1.3fr 1fr; gap:2.2rem; align-items:center; max-width:940px; margin:0 auto; }
+.product-preview .result{ margin-bottom:0; cursor:default; }
+.product-preview .result:hover{ transform:none; }
+.preview-notes{ display:flex; flex-direction:column; gap:1.1rem; }
+.preview-notes .note{ display:flex; gap:0.7rem; align-items:flex-start; }
+.preview-notes .note .dot-mark{ width:0.5rem; height:0.5rem; border-radius:50%; background:var(--coral); margin-top:0.5rem; flex:none; }
+.preview-notes .note p{ margin:0; font-size:0.92rem; color:var(--ink-soft); }
+.preview-notes .note b{ color:var(--ink); }
 
 .why-panel{ display:grid; grid-template-columns:1.3fr 1fr; gap:2rem; align-items:center; background:var(--card); border-radius:22px; box-shadow:var(--shadow-card); padding:2.2rem; }
 .why-panel h3{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.7rem; margin:0 0 0.7rem; }
@@ -359,7 +362,6 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 
 #view-operator .op-section{ padding:1.7rem 2rem; border-top:1px solid var(--rule); }
 #view-operator .op-section h2{ font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 1.1rem; }
-#view-operator .op-section h2 .n{ color:var(--coral-ink); margin-right:0.4rem; }
 #view-operator .op-section p{ margin:0 0 0.8rem; font-size:0.98rem; color:var(--ink); }
 #view-operator .op-section p:last-child{ margin-bottom:0; }
 
@@ -373,23 +375,13 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 .op-compare ul{ margin:0; padding-left:1.1rem; font-size:0.9rem; color:var(--ink-soft); }
 .op-compare li{ margin-bottom:0.45rem; }
 
-.op-steps{ display:flex; flex-direction:column; gap:1rem; margin-top:0.3rem; }
-.op-step{ display:flex; gap:1rem; align-items:flex-start; }
-.op-step .num{
-  width:2.2rem; height:2.2rem; border-radius:50%; background:var(--coral-soft); color:var(--coral-ink);
-  display:flex; align-items:center; justify-content:center; flex:none;
-  font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.05rem;
+.op-stat-strip{
+  display:flex; flex-wrap:wrap; gap:0.4rem 1.6rem; margin-top:1rem; padding-top:1rem;
+  border-top:1px dashed var(--rule); font-size:0.86rem; color:var(--ink-soft);
 }
-.op-step .txt b{ display:block; font-size:0.96rem; color:var(--ink); margin-bottom:0.15rem; }
-.op-step .txt span{ font-size:0.9rem; color:var(--ink-soft); }
-
-.op-stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
-.op-stat-row > div{ background:var(--bg); border-radius:16px; padding:1rem 1.1rem; }
-.op-stat-row .n{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.6rem; color:var(--ink); line-height:1; }
-.op-stat-row .d{ font-size:0.74rem; color:var(--ink-soft); margin-top:0.3rem; }
+.op-stat-strip b{ font-family:'Fraunces',system-ui,sans-serif; color:var(--ink); font-weight:700; margin-right:0.35rem; }
 
 .op-stub{ background:var(--ink-fixed); color:var(--onink-fixed); padding:2rem 2rem 2.2rem; }
-.op-stub .op-eyebrow{ color:var(--yellow); margin-bottom:0.6rem; }
 .op-stub h2{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.6rem; margin:0 0 0.6rem; color:var(--onink-fixed); }
 .op-stub p{ font-size:0.94rem; color:var(--onink-fixed); opacity:0.8; margin:0 0 1.3rem; max-width:46ch; }
 
@@ -477,9 +469,9 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 }
 
 @media (max-width:720px){
-  .search-form{ grid-template-columns:1fr; }
-  .swap{ display:none; }
-  .steps{ grid-template-columns:1fr; }
+  .search-form-primary{ grid-template-columns:1fr; }
+  .search-form-secondary{ grid-template-columns:1fr 1fr; max-width:none; }
+  .product-preview{ grid-template-columns:1fr; }
   .why-panel{ grid-template-columns:1fr; }
   .operator-band .inner{ flex-direction:column; align-items:flex-start; text-align:left; }
 }
@@ -490,7 +482,6 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 }
 @media (max-width:520px){
   .op-compare{ grid-template-columns:1fr; }
-  .op-stat-row{ grid-template-columns:1fr; }
   .op-form-row{ grid-template-columns:1fr; }
   .checkout-row2{ grid-template-columns:1fr; }
 }
@@ -518,33 +509,55 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 <!-- ==================== LANDING VIEW ==================== -->
 <div id="view-landing" class="view active">
   <div class="hero">
-    <div class="eyebrow display">NORTHERN CALIFORNIA <span class="aside">&middot; five corridors and counting</span></div>
-    <h1>Every local shuttle.<br/>One search.</h1>
-    <p>We haggle with every operator on your route so you don&rsquo;t have to &mdash; then pass the wholesale rate straight through. You often pay less than calling them yourself.</p>
-
-    <div class="search-panel">
-      <div class="search-form">
-        <div class="field"><label>From</label><select id="lFromSelect"></select></div>
-        <div class="swap" id="lSwapBtn" role="button" tabindex="0" aria-label="Swap origin and destination"><span aria-hidden="true">&#8646;</span></div>
-        <div class="field"><label>To</label><select id="lToSelect"></select></div>
-        <div class="field"><label>Date</label><input type="text" value="Wed, Jul 22" readonly /></div>
-        <div class="field"><label>Riders</label><input type="text" value="1 rider" readonly /></div>
-        <a class="search-btn" id="lSearchBtn" href="#">Search</a>
-      </div>
-      <div class="search-inline-note" id="lInlineNote"></div>
+    <div class="hero-copy">
+      <div class="eyebrow display">NORTHERN CALIFORNIA <span class="aside">&middot; five corridors and counting</span></div>
+      <h1>Every local shuttle.<br/>One search.</h1>
+      <p>We haggle with every operator on your route so you don&rsquo;t have to &mdash; then pass the wholesale rate straight through. Never more than calling them yourself, and on wholesale-flagged seats, less.</p>
     </div>
-    <div class="hero-note"><b>No account needed to search.</b> Real prices, before you book, every time.</div>
+    <div class="hero-search">
+      <div class="search-panel">
+        <div class="search-form-primary">
+          <div class="field"><label>From</label><select id="lFromSelect"></select></div>
+          <div class="field"><label>To</label><select id="lToSelect"></select></div>
+          <a class="search-btn" id="lSearchBtn" href="#">Search</a>
+        </div>
+        <div class="search-form-secondary">
+          <div class="field"><label>Date</label><input type="text" value="Wed, Jul 22" readonly /></div>
+          <div class="field"><label>Riders</label><input type="text" value="1 rider" readonly /></div>
+        </div>
+        <div class="search-inline-note" id="lInlineNote"></div>
+      </div>
+      <div class="hero-note"><b>No account needed to search.</b> Real prices, before you book, every time.</div>
+    </div>
   </div>
 
   <div class="section" style="padding-top:2.6rem;">
     <div class="section-head">
-      <div class="eyebrow display">HOW IT WORKS</div>
-      <h2>Three stops, no detours.</h2>
+      <h2>This is what you&rsquo;ll actually see.</h2>
     </div>
-    <div class="steps">
-      <div class="step"><div class="num display">1</div><h3>Search your route</h3><p>Tell us where you&rsquo;re headed. We check every local operator on that corridor at once.</p></div>
-      <div class="step"><div class="num display">2</div><h3>Compare real prices</h3><p>Wholesale-rate seats are flagged clearly, so you know exactly why one option is cheaper.</p></div>
-      <div class="step"><div class="num display">3</div><h3>Book &amp; ride</h3><p>Pay once, get your confirmation, and show up. The operator handles the rest, same as always.</p></div>
+    <div class="product-preview">
+      <div class="result featured" aria-hidden="true">
+        <div class="op-block">
+          <div class="op-top"><span class="op-name">Veterans Airporter</span><span class="badge best stamp-rotate">🏆 Best value</span></div>
+          <div class="op-type">Shared shuttle van</div>
+          <div class="op-meta"><span class="stars">★★★★★</span><span>4.8 (612)</span><span class="dot">&middot;</span><span>10-seat van</span></div>
+        </div>
+        <div class="timeline">
+          <div class="times mono">6:15a <span class="arrow">&rarr;</span> 7:35a</div>
+          <div class="duration">80 min &middot; Direct</div>
+        </div>
+        <div class="price-block">
+          <div class="price">$34</div>
+          <div class="price-note">$4 less than calling direct</div>
+          <div class="seats mono">6 seats left</div>
+          <button class="select-btn" tabindex="-1">Select</button>
+        </div>
+      </div>
+      <div class="preview-notes">
+        <div class="note"><span class="dot-mark"></span><p><b>Real operator, real rating.</b> Pulled from the same list riders search, not a mockup.</p></div>
+        <div class="note"><span class="dot-mark"></span><p><b>Price vs. calling direct, shown plainly.</b> No guessing why one option costs less.</p></div>
+        <div class="note"><span class="dot-mark"></span><p><b>Live seat count.</b> What&rsquo;s actually left on that run, not a stale estimate.</p></div>
+      </div>
     </div>
   </div>
 
@@ -553,15 +566,13 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   <div class="section">
     <div class="why-panel">
       <div>
-        <div class="eyebrow display" style="margin-bottom:0.8rem;">THE MECHANISM</div>
         <h3 style="font-size:1.9rem;">Empty seats are worth something &mdash; to you.</h3>
-        <p>A shared van running to the airport has near-zero extra cost to carry one more rider. Operators would rather fill that seat at a discount than run it empty.</p>
-        <p>We negotiate that discount directly with each operator and pass it straight to you. Same wholesale-rate logic hotels and tour companies have used for decades <span class="aside">&mdash; nobody had brought it to the shuttle van down the street until now.</span></p>
+        <p>An empty seat costs an operator almost nothing extra to fill, so we negotiate that discount directly and pass it straight to you <span class="aside">&mdash; the same wholesale-rate logic hotels and tour companies have used for decades.</span></p>
       </div>
       <div class="why-stats">
         <div class="why-stat"><div class="n mono">15&ndash;25%</div><div class="d">what other booking platforms already charge operators, on every seat</div></div>
         <div class="why-stat"><div class="n mono">$0</div><div class="d">what it costs an operator to list with us</div></div>
-        <div class="why-stat"><div class="n">Never</div><div class="d">more than you&rsquo;d pay calling the operator directly</div></div>
+        <div class="why-stat"><div class="n mono">1 in 4</div><div class="d">listings right now are priced below calling direct &mdash; the rest match it exactly, never more</div></div>
       </div>
     </div>
   </div>
@@ -576,7 +587,6 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       </div>
       <span class="sub">Tap a corridor to search it directly &rarr;</span>
     </div>
-    <div class="annotation">these two are the strongest so far</div>
     <div class="corridor-chips" id="corridorChips"></div>
   </div>
 
@@ -608,24 +618,23 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     <div class="road-divider" aria-hidden="true"></div>
 
     <div class="search-panel">
-      <div class="search-form">
+      <div class="search-form-primary">
         <div class="field"><label>From</label><select id="rFromSelect"></select></div>
-        <div class="swap" id="rSwapBtn" role="button" tabindex="0" aria-label="Swap origin and destination"><span aria-hidden="true">&#8646;</span></div>
         <div class="field"><label>To</label><select id="rToSelect"></select></div>
+        <button class="search-btn" id="rSearchBtn">Search</button>
+      </div>
+      <div class="search-form-secondary">
         <div class="field"><label>Date</label><input type="text" value="Wed, Jul 22" readonly /></div>
         <div class="field"><label>Riders</label><input type="text" value="1 rider" readonly /></div>
-        <button class="search-btn" id="rSearchBtn">Search</button>
       </div>
     </div>
 
     <div class="trust-strip">
       <span class="icon" aria-hidden="true"></span>
-      <span><b>Never more than calling direct.</b> Often less &mdash; we already did the haggling.</span>
+      <span><b>Priced against calling direct, on every listing.</b> Never more &mdash; and the wholesale-flagged ones are less.</span>
     </div>
 
     <div class="trust-chips">
-      <span>Secure checkout</span>
-      <span>Live seat availability</span>
       <span id="updatedAgo">Updated just now</span>
     </div>
 
@@ -642,7 +651,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     </div>
 
     <div class="empty-state" id="emptyState">
-      <div class="display" style="font-size:1.3rem;margin-bottom:0.5rem;">No rides listed for <span id="emptyRouteLabel"></span> yet</div>
+      <div class="display" id="emptyStateHeading" style="font-size:1.3rem;margin-bottom:0.5rem;">No rides listed for that route yet</div>
       <p>We&rsquo;re growing corridor by corridor &mdash; that route isn&rsquo;t live in this demo. Try one of the five we&rsquo;ve actually built out:</p>
       <div class="chip-row" id="emptyStateChips"></div>
     </div>
@@ -665,7 +674,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       </div>
 
       <div class="op-section">
-        <h2><span class="n">01</span>What you&rsquo;re dealing with now</h2>
+        <h2>What you&rsquo;re dealing with now</h2>
         <div class="op-compare">
           <div class="bad">
             <span class="label">Today</span>
@@ -680,32 +689,17 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
             <ul>
               <li>Listed alongside every operator on your corridor</li>
               <li>No monthly fee, no cost to list</li>
-              <li>Discount applies only to seats you flag as extra capacity</li>
+              <li>Discount applies only to seats you flag as extra capacity, and you keep 100% of your normal rate on the rest</li>
             </ul>
           </div>
         </div>
-      </div>
-
-      <div class="op-section">
-        <h2><span class="n">02</span>How it works</h2>
-        <div class="op-steps">
-          <div class="op-step"><div class="num display">1</div><div class="txt"><b>Tell us your rate</b><span>Your normal fare, plus how many seats on a typical run go unsold.</span></div></div>
-          <div class="op-step"><div class="num display">2</div><div class="txt"><b>We list your route</b><span>Riders searching your corridor see you alongside everyone else &mdash; full price on full seats.</span></div></div>
-          <div class="op-step"><div class="num display">3</div><div class="txt"><b>You get paid</b><span>Your rate, minus a small share, and only on the marginal seats we actually filled for you.</span></div></div>
-        </div>
-      </div>
-
-      <div class="op-section">
-        <h2><span class="n">03</span>The numbers</h2>
-        <div class="op-stat-row">
-          <div><div class="n mono">15&ndash;25%</div><div class="d">what other platforms already take, on every seat</div></div>
-          <div><div class="n mono">$0</div><div class="d">cost to list, no monthly fee</div></div>
-          <div><div class="n mono">100%</div><div class="d">of your rate on seats you&rsquo;d have filled anyway</div></div>
+        <div class="op-stat-strip">
+          <span><b class="mono">15&ndash;25%</b> what other platforms already take, on every seat</span>
+          <span><b class="mono">$0</b> cost to list, no monthly fee</span>
         </div>
       </div>
 
       <div class="op-stub">
-        <div class="op-eyebrow display">LET&rsquo;S TALK</div>
         <h2 id="opFormHeading">Want your route listed?</h2>
         <p id="opFormDek">Takes about eight minutes &mdash; we&rsquo;ve timed it. Tell us your route, your rate, and how many seats typically go unsold and we&rsquo;ll take it from there.</p>
 
@@ -788,7 +782,6 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 (function(){
   // ---------------- ROUTE DATA ----------------
   var PLACES_FROM = ['Napa Valley, CA','South Lake Tahoe, CA','Davis, CA','Santa Cruz, CA','Mammoth Lakes, CA'];
-  var PLACES_TO = ['SFO airport','Reno-Tahoe airport','Sacramento airport','San Jose airport','Mammoth Yosemite airport'];
 
   var CORRIDORS = [
     { key:'napa', name:'Napa & Sonoma', sub:'wine country → SFO/OAK/SJC', tag:'Tier 1', from:'Napa Valley, CA', to:'SFO airport' },
@@ -846,6 +839,12 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 
   function routeKey(from, to){ return from + '|' + to; }
 
+  var FROM_TO_MAP = {};
+  CORRIDORS.forEach(function(c){ FROM_TO_MAP[c.from] = c.to; });
+  function syncToOptions(fromSelect, toSelect){
+    toSelect.innerHTML = '<option>' + FROM_TO_MAP[fromSelect.value] + '</option>';
+  }
+
   function starsHtml(ratingStr){
     var m = ratingStr.match(/^([\d.]+)/);
     var val = m ? parseFloat(m[1]) : 5;
@@ -888,8 +887,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     }).join('');
   }
   ['l','r'].forEach(function(p){
-    populateSelect(document.getElementById(p + 'FromSelect'), PLACES_FROM, 'Napa Valley, CA');
-    populateSelect(document.getElementById(p + 'ToSelect'), PLACES_TO, 'SFO airport');
+    var fromSel = document.getElementById(p + 'FromSelect');
+    var toSel = document.getElementById(p + 'ToSelect');
+    populateSelect(fromSel, PLACES_FROM, 'Napa Valley, CA');
+    syncToOptions(fromSel, toSel);
   });
 
   // corridor chips (landing)
@@ -949,16 +950,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   function wireSearch(prefix){
     var fromSelect = document.getElementById(prefix + 'FromSelect');
     var toSelect = document.getElementById(prefix + 'ToSelect');
-    var swapBtn = document.getElementById(prefix + 'SwapBtn');
-    function swapRoute(){
-      var tmp = fromSelect.value;
-      fromSelect.value = toSelect.value;
-      toSelect.value = tmp;
-    }
-    swapBtn.addEventListener('click', swapRoute);
-    swapBtn.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); swapRoute(); }
-    });
+    fromSelect.addEventListener('change', function(){ syncToOptions(fromSelect, toSelect); });
     return {
       fromSelect: fromSelect, toSelect: toSelect,
       route: function(){ return ROUTES[routeKey(fromSelect.value, toSelect.value)]; }
@@ -970,7 +962,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   var resultsHeader = document.getElementById('resultsHeader');
   var routeLabel = document.getElementById('routeLabel');
   var resultsCountNum = document.getElementById('resultsCountNum');
-  var emptyRouteLabel = document.getElementById('emptyRouteLabel');
+  var emptyStateHeading = document.getElementById('emptyStateHeading');
   var currentSort = 'depart';
 
   function renderResults(route){
@@ -1018,7 +1010,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     if(!route){
       resultsList.innerHTML = '';
       resultsHeader.style.display = 'none';
-      emptyRouteLabel.textContent = from + ' → ' + to;
+      emptyStateHeading.textContent = 'No rides listed for ' + from + ' → ' + to + ' yet';
       emptyState.classList.add('show');
       return;
     }
@@ -1031,8 +1023,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   }
 
   function setBothForms(from, to){
-    landing.fromSelect.value = from; landing.toSelect.value = to;
-    results.fromSelect.value = from; results.toSelect.value = to;
+    [landing, results].forEach(function(f){
+      f.fromSelect.value = from;
+      syncToOptions(f.fromSelect, f.toSelect);
+    });
   }
 
   // corridor chip clicks (landing + empty state) jump straight to results
