@@ -342,7 +342,8 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 .badge.best{ background:var(--yellow); color:var(--yellow-ink); }
 .op-type{ font-size:0.8rem; font-weight:400; color:var(--ink-soft); margin-bottom:0.4rem; }
 .op-meta{ display:flex; align-items:center; gap:0.4rem; font-size:0.79rem; font-weight:500; color:var(--ink-soft); flex-wrap:wrap; }
-.op-meta .stars{ color:var(--yellow); font-size:0.72rem; letter-spacing:1px; }
+.op-meta .stars{ position:relative; display:inline-block; color:var(--ink-faint); font-size:0.72rem; letter-spacing:1px; white-space:nowrap; }
+.op-meta .stars .stars-fill{ position:absolute; left:0; top:0; overflow:hidden; color:var(--yellow); white-space:nowrap; }
 .op-meta .dot{ opacity:0.5; }
 .op-meta .no-markup{ color:var(--sky-ink); }
 
@@ -572,9 +573,9 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
         <div class="hero-preview-label">This is what you&rsquo;ll actually see &mdash; a real listing, not a mockup</div>
         <div class="result featured" aria-hidden="true">
           <div class="op-block">
-            <div class="op-top"><span class="op-name">Veterans Airporter</span><span class="badge best stamp-rotate">🏆 Best value</span></div>
+            <div class="op-top"><span class="op-name">Silverado Trail Shuttle</span><span class="badge best stamp-rotate">🏆 Best value</span></div>
             <div class="op-type">Shared shuttle van</div>
-            <div class="op-meta"><span class="stars">★★★★★</span><span>4.8 (612)</span><span class="dot">&middot;</span><span>10-seat van</span></div>
+            <div class="op-meta"><span class="stars">★★★★★<span class="stars-fill" style="width:96.0%">★★★★★</span></span><span>4.8 (612)</span><span class="dot">&middot;</span><span>10-seat van</span></div>
           </div>
           <div class="timeline">
             <div class="times mono">6:15a <span class="arrow">&rarr;</span> 7:35a</div>
@@ -742,7 +743,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 
         <form class="op-form" id="opForm">
           <div class="op-form-row">
-            <div class="op-field"><label>Business name</label><input type="text" id="opBusinessName" placeholder="e.g. Napa Valley Transfers" required /></div>
+            <div class="op-field"><label>Business name</label><input type="text" id="opBusinessName" placeholder="e.g. Oak Knoll Transfers" required /></div>
             <div class="op-field"><label>Contact email</label><input type="email" id="opEmail" placeholder="you@company.com" required /></div>
           </div>
           <div class="op-form-row">
@@ -847,44 +848,44 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   ROUTES['Napa Valley, CA|SFO airport'] = {
     label: 'Napa Valley, CA → SFO airport',
     rides: [
-      { name:'Veterans Airporter', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (612)', depart:'6:15a', arrive:'7:35a', duration:80, price:34, note:'$4 less than calling direct', seats:'6 seats left', featured:true, badges:['best','wholesale'] },
-      { name:'California Wine Tours', type:'Shared shuttle van', vehicle:'12-seat van', rating:'4.9 (1,204)', depart:'6:30a', arrive:'7:50a', duration:80, price:38, note:'same as calling direct', seats:'3 seats left', badges:['trust'] },
-      { name:'Napa Valley Transfers', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.7 (388)', depart:'7:45a', arrive:'9:05a', duration:80, price:36, note:'same as calling direct', seats:'4 seats left', badges:['trust'] },
+      { name:'Silverado Trail Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (612)', depart:'6:15a', arrive:'7:35a', duration:80, price:34, note:'$4 less than calling direct', seats:'6 seats left', featured:true, badges:['best','wholesale'] },
+      { name:'Carneros Wine Shuttle', type:'Shared shuttle van', vehicle:'12-seat van', rating:'4.9 (1,204)', depart:'6:30a', arrive:'7:50a', duration:80, price:38, note:'same as calling direct', seats:'3 seats left', badges:['trust'] },
+      { name:'Oak Knoll Transfers', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.7 (388)', depart:'7:45a', arrive:'9:05a', duration:80, price:36, note:'same as calling direct', seats:'4 seats left', badges:['trust'] },
       { name:'Bay Valley Airporter', type:'Shared shuttle van · Airporter route', vehicle:'14-seat van', rating:'4.6 (2,910)', depart:'8:30a', arrive:'9:50a', duration:80, price:32, note:'same as calling direct', seats:'8 seats left', badges:['trust'] },
-      { name:'Wine Country Car Service', type:'Private car · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.9 (204)', depart:'Any time', arrive:'', duration:70, price:89, note:'same as calling direct', seats:'on request', badges:[] }
+      { name:'Trancas Car Service', type:'Private car · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.9 (204)', depart:'Any time', arrive:'', duration:70, price:89, note:'same as calling direct', seats:'on request', badges:[] }
     ]
   };
   ROUTES['South Lake Tahoe, CA|Reno-Tahoe airport'] = {
     label: 'South Lake Tahoe, CA → Reno-Tahoe airport',
     rides: [
-      { name:'South Tahoe Airporter (Amador Stage Lines)', type:'Shared shuttle van', vehicle:'12-seat van', rating:'4.7 (940)', depart:'5:45a', arrive:'7:00a', duration:75, price:29, note:'$3 less than calling direct', seats:'5 seats left', featured:true, badges:['best','wholesale'] },
-      { name:'North Lake Tahoe Express', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (615)', depart:'6:15a', arrive:'7:35a', duration:80, price:32, note:'same as calling direct', seats:'4 seats left', badges:['trust'] },
-      { name:'Tahoe Sierra Transportation', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.6 (301)', depart:'7:00a', arrive:'8:15a', duration:75, price:30, note:'same as calling direct', seats:'6 seats left', badges:['trust'] },
-      { name:'Tahoe Elite', type:'Private SUV · door to door', vehicle:'SUV (1–4 riders)', rating:'4.9 (188)', depart:'Any time', arrive:'', duration:65, price:95, note:'same as calling direct', seats:'on request', badges:[] },
-      { name:'Reno-Tahoe Limo', type:'Private sedan · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.8 (142)', depart:'Any time', arrive:'', duration:70, price:110, note:'same as calling direct', seats:'on request', badges:[] }
+      { name:'Echo Summit Shuttle', type:'Shared shuttle van', vehicle:'12-seat van', rating:'4.7 (940)', depart:'5:45a', arrive:'7:00a', duration:75, price:29, note:'$3 less than calling direct', seats:'5 seats left', featured:true, badges:['best','wholesale'] },
+      { name:'Kingsbury Grade Express', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (615)', depart:'6:15a', arrive:'7:35a', duration:80, price:32, note:'same as calling direct', seats:'4 seats left', badges:['trust'] },
+      { name:'Meyers Gateway Shuttle', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.6 (301)', depart:'7:00a', arrive:'8:15a', duration:75, price:30, note:'same as calling direct', seats:'6 seats left', badges:['trust'] },
+      { name:'Emerald Bay Car Service', type:'Private SUV · door to door', vehicle:'SUV (1–4 riders)', rating:'4.9 (188)', depart:'Any time', arrive:'', duration:65, price:95, note:'same as calling direct', seats:'on request', badges:[] },
+      { name:'Mount Rose Limo', type:'Private sedan · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.8 (142)', depart:'Any time', arrive:'', duration:70, price:110, note:'same as calling direct', seats:'on request', badges:[] }
     ]
   };
   ROUTES['Davis, CA|Sacramento airport'] = {
     label: 'Davis, CA → Sacramento airport',
     rides: [
-      { name:'Solano Airport Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.6 (274)', depart:'5:30a', arrive:'6:15a', duration:45, price:22, note:'$3 less than calling direct', seats:'7 seats left', featured:true, badges:['best','wholesale'] },
+      { name:'Yolo Airport Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.6 (274)', depart:'5:30a', arrive:'6:15a', duration:45, price:22, note:'$3 less than calling direct', seats:'7 seats left', featured:true, badges:['best','wholesale'] },
       { name:'Causeway Airport Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.7 (289)', depart:'6:00a', arrive:'6:50a', duration:50, price:24, note:'same as calling direct', seats:'5 seats left', badges:['trust'] }
     ]
   };
   ROUTES['Santa Cruz, CA|San Jose airport'] = {
     label: 'Santa Cruz, CA → San Jose airport',
     rides: [
-      { name:'Santa Cruz Airport Flyer', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.7 (398)', depart:'6:00a', arrive:'6:50a', duration:50, price:26, note:'$3 less than calling direct', seats:'4 seats left', featured:true, badges:['best','wholesale'] },
-      { name:'Santa Cruz Experience', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.6 (211)', depart:'7:00a', arrive:'7:55a', duration:55, price:28, note:'same as calling direct', seats:'5 seats left', badges:['trust'] }
+      { name:'Pajaro Valley Flyer', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.7 (398)', depart:'6:00a', arrive:'6:50a', duration:50, price:26, note:'$3 less than calling direct', seats:'4 seats left', featured:true, badges:['best','wholesale'] },
+      { name:'Boardwalk Shuttle Co.', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.6 (211)', depart:'7:00a', arrive:'7:55a', duration:55, price:28, note:'same as calling direct', seats:'5 seats left', badges:['trust'] }
     ]
   };
   ROUTES['Mammoth Lakes, CA|Mammoth Yosemite airport'] = {
     label: 'Mammoth Lakes, CA → Mammoth Yosemite airport',
     rides: [
-      { name:'Mammoth All Weather Shuttle', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.7 (166)', depart:'5:15a', arrive:'5:45a', duration:30, price:18, note:'$2 less than calling direct', seats:'6 seats left', featured:true, badges:['best','wholesale'] },
-      { name:'Mammoth Taxi', type:'Shared SUV', vehicle:'SUV (1–5 riders)', rating:'4.6 (203)', depart:'6:00a', arrive:'6:25a', duration:25, price:20, note:'same as calling direct', seats:'3 seats left', badges:['trust'] },
-      { name:'Sierra Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (94)', depart:'6:45a', arrive:'7:15a', duration:30, price:19, note:'same as calling direct', seats:'5 seats left', badges:['trust'] },
-      { name:'My Mammoth Shuttle', type:'Private car · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.7 (58)', depart:'Any time', arrive:'', duration:25, price:45, note:'same as calling direct', seats:'on request', badges:[] }
+      { name:'June Lake Shuttle', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.7 (166)', depart:'5:15a', arrive:'5:45a', duration:30, price:18, note:'$2 less than calling direct', seats:'6 seats left', featured:true, badges:['best','wholesale'] },
+      { name:'Minaret Taxi', type:'Shared SUV', vehicle:'SUV (1–5 riders)', rating:'4.6 (203)', depart:'6:00a', arrive:'6:25a', duration:25, price:20, note:'same as calling direct', seats:'3 seats left', badges:['trust'] },
+      { name:'Old Mammoth Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (94)', depart:'6:45a', arrive:'7:15a', duration:30, price:19, note:'same as calling direct', seats:'5 seats left', badges:['trust'] },
+      { name:'Crowley Lake Car Service', type:'Private car · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.7 (58)', depart:'Any time', arrive:'', duration:25, price:45, note:'same as calling direct', seats:'on request', badges:[] }
     ]
   };
   var DEPART_MIN = { '5:15a':315,'5:30a':330,'5:45a':345,'6:00a':360,'6:15a':375,'6:30a':390,'6:45a':405,'7:00a':420,'7:45a':465,'8:30a':510,'Any time':9999 };
@@ -900,10 +901,8 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   function starsHtml(ratingStr){
     var m = ratingStr.match(/^([\d.]+)/);
     var val = m ? parseFloat(m[1]) : 5;
-    var full = Math.round(val);
-    var s = '';
-    for(var i=0;i<5;i++){ s += (i<full) ? '★' : '☆'; }
-    return s;
+    var pct = Math.max(0, Math.min(100, (val / 5) * 100));
+    return '★★★★★<span class="stars-fill" style="width:' + pct.toFixed(1) + '%">★★★★★</span>';
   }
 
   function cardHtml(ride){
