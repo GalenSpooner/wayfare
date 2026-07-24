@@ -1,4 +1,5 @@
 <title>Wayfare — every local shuttle, one search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 @font-face{
   font-family:'Fraunces';
@@ -562,7 +563,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
           <a class="search-btn" id="lSearchBtn" href="#">Search</a>
         </div>
         <div class="search-form-secondary">
-          <div class="field"><label>Date</label><input type="text" value="Wed, Jul 22" readonly /></div>
+          <div class="field"><label>Date</label><input type="text" id="lDateField" value="Wed, Jul 22" readonly /></div>
           <div class="field"><label>Riders</label><input type="text" value="1 rider" readonly /></div>
         </div>
         <div class="search-inline-note" id="lInlineNote"></div>
@@ -659,7 +660,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
         <button class="search-btn" id="rSearchBtn">Search</button>
       </div>
       <div class="search-form-secondary">
-        <div class="field"><label>Date</label><input type="text" value="Wed, Jul 22" readonly /></div>
+        <div class="field"><label>Date</label><input type="text" id="rDateField" value="Wed, Jul 22" readonly /></div>
         <div class="field"><label>Riders</label><input type="text" value="1 rider" readonly /></div>
       </div>
     </div>
@@ -817,6 +818,15 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 
 <script>
 (function(){
+  // demo search date — always "tomorrow" relative to whenever this page is actually loaded
+  var DEMO_DATE = (function(){
+    var d = new Date();
+    d.setDate(d.getDate() + 1);
+    var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate();
+  })();
+
   // ---------------- ROUTE DATA ----------------
   var PLACES_FROM = ['Napa Valley, CA','South Lake Tahoe, CA','Davis, CA','Santa Cruz, CA','Mammoth Lakes, CA'];
 
@@ -825,11 +835,11 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/NorCal2018_-005_Wine_Country_-_Random_Napa_Valley_Vineyard_on_the_side_of_a_road_-S0292033.jpg/1280px-NorCal2018_-005_Wine_Country_-_Random_Napa_Valley_Vineyard_on_the_side_of_a_road_-S0292033.jpg' },
     { key:'tahoe', name:'Lake Tahoe', sub:'Ski season or not, these vans go up the hill daily — we just caught the empty seats.', tag:'Tier 1', from:'South Lake Tahoe, CA', to:'Reno-Tahoe airport',
       photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/South_Lake_Tahoe%2C_Nevada_%2821572265225%29.jpg/1280px-South_Lake_Tahoe%2C_Nevada_%2821572265225%29.jpg' },
-    { key:'sac', name:'Sacramento Valley', sub:'Davis & Chico → SMF', tag:'Tier 2', from:'Davis, CA', to:'Sacramento airport',
+    { key:'sac', name:'Sacramento Valley', sub:'Davis → Sacramento airport', tag:'Tier 2', from:'Davis, CA', to:'Sacramento airport',
       photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Aerial_view_of_Sutter_Buttes%2C_December_2021.JPG/1280px-Aerial_view_of_Sutter_Buttes%2C_December_2021.JPG' },
-    { key:'coast', name:'Central Coast', sub:'Santa Cruz, SLO, Isla Vista', tag:'Tier 2', from:'Santa Cruz, CA', to:'San Jose airport',
+    { key:'coast', name:'Central Coast', sub:'Santa Cruz → San Jose airport', tag:'Tier 2', from:'Santa Cruz, CA', to:'San Jose airport',
       photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Morro_Strand_State_Beach_%281%29.jpg/1280px-Morro_Strand_State_Beach_%281%29.jpg' },
-    { key:'sierra', name:'Eastern Sierra', sub:'Mammoth & Bishop gateway', tag:'Tier 2', from:'Mammoth Lakes, CA', to:'Mammoth Yosemite airport',
+    { key:'sierra', name:'Eastern Sierra', sub:'Mammoth Lakes → Mammoth Yosemite airport', tag:'Tier 2', from:'Mammoth Lakes, CA', to:'Mammoth Yosemite airport',
       photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Laurel_Mountain_Convict_Lake.jpg/1280px-Laurel_Mountain_Convict_Lake.jpg' }
   ];
 
@@ -840,7 +850,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       { name:'Veterans Airporter', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (612)', depart:'6:15a', arrive:'7:35a', duration:80, price:34, note:'$4 less than calling direct', seats:'6 seats left', featured:true, badges:['best','wholesale'] },
       { name:'California Wine Tours', type:'Shared shuttle van', vehicle:'12-seat van', rating:'4.9 (1,204)', depart:'6:30a', arrive:'7:50a', duration:80, price:38, note:'same as calling direct', seats:'3 seats left', badges:['trust'] },
       { name:'Napa Valley Transfers', type:'Shared shuttle van', vehicle:'8-seat van', rating:'4.7 (388)', depart:'7:45a', arrive:'9:05a', duration:80, price:36, note:'same as calling direct', seats:'4 seats left', badges:['trust'] },
-      { name:'Groome Transportation', type:'Shared shuttle van · Airporter route', vehicle:'14-seat van', rating:'4.6 (2,910)', depart:'8:30a', arrive:'9:50a', duration:80, price:32, note:'same as calling direct', seats:'8 seats left', badges:['trust'] },
+      { name:'Bay Valley Airporter', type:'Shared shuttle van · Airporter route', vehicle:'14-seat van', rating:'4.6 (2,910)', depart:'8:30a', arrive:'9:50a', duration:80, price:32, note:'same as calling direct', seats:'8 seats left', badges:['trust'] },
       { name:'Wine Country Car Service', type:'Private car · door to door', vehicle:'Sedan (1–3 riders)', rating:'4.9 (204)', depart:'Any time', arrive:'', duration:70, price:89, note:'same as calling direct', seats:'on request', badges:[] }
     ]
   };
@@ -858,7 +868,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     label: 'Davis, CA → Sacramento airport',
     rides: [
       { name:'Solano Airport Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.6 (274)', depart:'5:30a', arrive:'6:15a', duration:45, price:22, note:'$3 less than calling direct', seats:'7 seats left', featured:true, badges:['best','wholesale'] },
-      { name:'Veterans Airporter', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.8 (612)', depart:'6:00a', arrive:'6:50a', duration:50, price:24, note:'same as calling direct', seats:'5 seats left', badges:['trust'] }
+      { name:'Causeway Airport Shuttle', type:'Shared shuttle van', vehicle:'10-seat van', rating:'4.7 (289)', depart:'6:00a', arrive:'6:50a', duration:50, price:24, note:'same as calling direct', seats:'5 seats left', badges:['trust'] }
     ]
   };
   ROUTES['Santa Cruz, CA|San Jose airport'] = {
@@ -953,7 +963,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     'SFO airport':              { x: 75.3,  y: 175.5, label: 'SF Bay Area' },
     'San Jose airport':         { x: 87.9,  y: 184.7, label: null },
     'Sacramento airport':       { x: 97.5,  y: 136.9, label: 'Sacramento' },
-    'Davis, CA':                { x: 93.3,  y: 142.3, label: 'Davis' },
+    'Davis, CA':                { x: 93.3,  y: 142.3, label: 'Davis', labelDx: -3, labelDy: -2, labelAnchor: 'end' },
     'South Lake Tahoe, CA':     { x: 142.9, y: 128.2, label: 'Lake Tahoe' },
     'Reno-Tahoe airport':       { x: 148.8, y: 108.1, label: 'Reno' },
     'Santa Cruz, CA':           { x: 85.1,  y: 198.7, label: 'Santa Cruz' },
@@ -974,8 +984,11 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       var key = p.x + ',' + p.y;
       if(seenPoints[key]) return;
       seenPoints[key] = true;
+      var lx = p.x + (p.labelDx != null ? p.labelDx : 6);
+      var ly = p.y + (p.labelDy != null ? p.labelDy : 3);
+      var anchorAttr = p.labelAnchor ? ' text-anchor="' + p.labelAnchor + '"' : '';
       pointsSvg += '<g class="map-point"><circle cx="' + p.x + '" cy="' + p.y + '" r="3.5" fill="' + color + '"></circle>' +
-        (p.label ? '<text x="' + (p.x + 6) + '" y="' + (p.y + 3) + '">' + p.label + '</text>' : '') + '</g>';
+        (p.label ? '<text x="' + lx + '" y="' + ly + '"' + anchorAttr + '>' + p.label + '</text>' : '') + '</g>';
     });
   });
   mapRoutesEl.innerHTML = routesSvg;
@@ -1096,7 +1109,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     }
     resultsHeader.style.display = '';
     emptyState.classList.remove('show');
-    routeLabel.textContent = from + ' → ' + to + ' · Wed, Jul 22';
+    routeLabel.textContent = from + ' → ' + to + ' · ' + DEMO_DATE;
     resultsCountNum.textContent = route.rides.length;
     resultsList.innerHTML = skeletonHtml(route.rides.length);
     setTimeout(function(){ renderResults(route); }, 380);
@@ -1159,6 +1172,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   resultsList.addEventListener('click', function(e){
     var btn = e.target.closest('.select-btn');
     if(!btn) return;
+    if(btn.classList.contains('is-selected')){
+      showToast("Already booked — check your email for the confirmation.");
+      return;
+    }
     var card = btn.closest('.result');
     pendingCard = card;
     lastFocusedEl = btn;
@@ -1167,7 +1184,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
     var times = card.querySelector('.times').textContent;
     tripSummary.innerHTML =
       '<div class="row"><span>Operator</span><b>' + name + '</b></div>' +
-      '<div class="row"><span>Route</span><b>' + routeLabel.textContent.replace(' · Wed, Jul 22','') + '</b></div>' +
+      '<div class="row"><span>Route</span><b>' + routeLabel.textContent.replace(' · ' + DEMO_DATE, '') + '</b></div>' +
       '<div class="row"><span>Departs</span><b>' + times + '</b></div>' +
       '<div class="row total"><span>Total</span><b>' + price + '</b></div>';
     checkoutStep.style.display = '';
@@ -1243,7 +1260,9 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   }, 15000);
 
   // initial state
-  routeLabel.textContent = 'Napa Valley, CA → SFO airport · Wed, Jul 22';
+  document.getElementById('lDateField').value = DEMO_DATE;
+  document.getElementById('rDateField').value = DEMO_DATE;
+  routeLabel.textContent = 'Napa Valley, CA → SFO airport · ' + DEMO_DATE;
   showView('landing');
 })();
 </script>
