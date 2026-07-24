@@ -13,6 +13,7 @@
   --sky:#4457c9; --sky-soft:#e6e9fb; --sky-ink:#33419e;
   --yellow:#ffc93c; --yellow-soft:#fff3d1; --yellow-ink:#8a5f00;
   --green:#0f9c8c; --green-soft:#dcf3ef; --green-ink:#0a6459;
+  --price:#a3441c; --price-soft:#fbe9df;
   --shadow-card:0 2px 10px rgba(16,42,38,0.06);
   --ink-fixed:#102a26; --onink-fixed:#f1faf8;
   --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234b6b65' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -24,6 +25,7 @@
     --sky:#8b9af0; --sky-soft:#1e2247; --sky-ink:#b9c2fa;
     --yellow:#ffd666; --yellow-soft:#3a2f10; --yellow-ink:#4a3400;
     --green:#2dd4bf; --green-soft:#123b36; --green-ink:#7fead9;
+    --price:#f0a06a; --price-soft:#3a2213;
     --shadow-card:0 2px 10px rgba(0,0,0,0.35);
     --ink-fixed:#102a26; --onink-fixed:#f1faf8;
     --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239fc0ba' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -35,6 +37,7 @@
   --sky:#8b9af0; --sky-soft:#1e2247; --sky-ink:#b9c2fa;
   --yellow:#ffd666; --yellow-soft:#3a2f10; --yellow-ink:#4a3400;
   --green:#2dd4bf; --green-soft:#123b36; --green-ink:#7fead9;
+  --price:#f0a06a; --price-soft:#3a2213;
   --shadow-card:0 2px 10px rgba(0,0,0,0.35);
   --ink-fixed:#102a26; --onink-fixed:#f1faf8;
   --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239fc0ba' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -45,6 +48,7 @@
   --sky:#4457c9; --sky-soft:#e6e9fb; --sky-ink:#33419e;
   --yellow:#ffc93c; --yellow-soft:#fff3d1; --yellow-ink:#8a5f00;
   --green:#0f9c8c; --green-soft:#dcf3ef; --green-ink:#0a6459;
+  --price:#a3441c; --price-soft:#fbe9df;
   --shadow-card:0 2px 10px rgba(16,42,38,0.06);
   --ink-fixed:#102a26; --onink-fixed:#f1faf8;
   --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234b6b65' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -58,7 +62,7 @@ body{
 }
 .mono{ font-family:ui-monospace,'SF Mono','Cascadia Code',Consolas,monospace; font-variant-numeric:tabular-nums; }
 .display{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; }
-.aside{ font-style:italic; color:var(--coral-ink); }
+.aside{ font-style:italic; color:var(--ink-soft); }
 button{ font:inherit; cursor:pointer; }
 input,select,textarea{ font:inherit; }
 a{ color:inherit; text-decoration:none; cursor:pointer; }
@@ -114,7 +118,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 
 .road-divider{
   height:4px;
-  background-image:repeating-linear-gradient(to right, var(--coral) 0, var(--coral) 14px, transparent 14px, transparent 26px);
+  background-image:repeating-linear-gradient(to right, var(--ink-faint) 0, var(--ink-faint) 14px, transparent 14px, transparent 26px);
   border-radius:2px; opacity:0.4; margin:1.8rem auto; max-width:110px;
 }
 
@@ -162,7 +166,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   display:grid; grid-template-columns:1.1fr 0.95fr; gap:2.8rem; align-items:start;
 }
 #view-landing .hero-copy{ text-align:left; }
-#view-landing .hero .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); margin-bottom:1rem; }
+#view-landing .hero .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--ink-faint); margin-bottom:1rem; }
 #view-landing .hero .eyebrow .aside{ font-weight:400; color:var(--ink-faint); }
 #view-landing .hero h1{
   font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:clamp(2.3rem,4.4vw,3.5rem);
@@ -178,14 +182,14 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 
 .section{ max-width:960px; margin:0 auto; padding:3.2rem 1.5rem; }
 .section-head{ text-align:center; margin-bottom:2.2rem; }
-.section-head .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); margin-bottom:0.7rem; }
+.section-head .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--ink-faint); margin-bottom:0.7rem; }
 .section-head h2{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:clamp(1.7rem,4vw,2.3rem); margin:0; }
 .section-head p.sub{ color:var(--ink-soft); font-size:0.92rem; margin:0.6rem 0 0; }
 
 /* editorial variant: left-aligned, folded into content instead of a centered banner */
-.section.tight{ padding-top:2.4rem; padding-bottom:2.4rem; }
+.section.tight{ max-width:1120px; padding-top:2.4rem; padding-bottom:2.4rem; }
 .section-intro{ margin:0 0 1.3rem; display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-.section-intro .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); }
+.section-intro .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--ink-faint); }
 .section-intro .sub{ color:var(--ink-faint); font-size:0.84rem; }
 
 .stamp-rotate{ display:inline-block; transform:rotate(-4deg); }
@@ -206,14 +210,16 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .why-panel p:last-of-type{ margin-bottom:0; }
 .why-stats{ display:flex; flex-direction:column; gap:1.1rem; }
 .why-stat{ background:var(--bg); border-radius:14px; padding:0.9rem 1rem; }
-.why-stat .n{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.7rem; color:var(--coral-ink); line-height:1; }
+.why-stat .n{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.7rem; color:var(--price); line-height:1; }
 .why-stat .d{ font-size:0.78rem; color:var(--ink-soft); margin-top:0.25rem; }
 
 .corridor-chips{ display:flex; flex-wrap:wrap; gap:0.7rem; justify-content:flex-start; }
 .chip{
-  background:var(--card); border-radius:16px; box-shadow:var(--shadow-card); padding:0.7rem 1.2rem;
+  background:var(--card); border-radius:18px; box-shadow:var(--shadow-card); padding:0.7rem 1.2rem;
   font-size:0.86rem; font-weight:700; color:var(--ink); border:2px solid transparent;
 }
+.chip.tier1{ max-width:230px; }
+.chip.tier1 span{ white-space:normal; }
 .chip.clickable{ cursor:pointer; }
 .chip.clickable:hover{ border-color:var(--coral); }
 .chip span{ display:block; font-weight:500; font-size:0.74rem; color:var(--ink-soft); margin-top:0.15rem; }
@@ -288,10 +294,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 }
 .result:hover{ box-shadow:0 8px 22px rgba(24,24,37,0.11); transform:translateY(-1px); }
 .result.featured{
-  background:var(--coral-soft); box-shadow:none; border-left:4px solid var(--coral);
+  background:var(--price-soft); box-shadow:none; border-left:4px solid var(--price);
   padding-top:1.25rem; padding-bottom:1.25rem;
 }
-.result.featured:hover{ box-shadow:0 8px 22px rgba(255,90,60,0.16); }
+.result.featured:hover{ box-shadow:0 8px 22px rgba(163,68,28,0.18); }
 .result.selected{
   border-left:4px solid var(--sky); background:var(--sky-soft);
   transform:scale(1.008); box-shadow:0 8px 22px rgba(31,169,224,0.16);
@@ -314,10 +320,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 .timeline .duration{ font-size:0.76rem; font-weight:500; color:var(--ink-faint); margin-top:0.3rem; }
 
 .price-block{ text-align:right; min-width:118px; }
-.price{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.95rem; color:var(--ink); line-height:1; }
-.result.featured .price{ font-size:2.15rem; color:var(--coral-ink); }
+.price{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.95rem; color:var(--price); line-height:1; }
+.result.featured .price{ font-size:2.15rem; }
 .price-note{ font-size:0.72rem; color:var(--ink-faint); font-weight:500; margin:0.3rem 0 0.7rem; }
-.result.featured .price-note{ color:var(--coral-ink); font-weight:700; }
+.result.featured .price-note{ color:var(--price); font-weight:700; }
 .seats{ font-size:0.72rem; font-weight:500; color:var(--ink-faint); margin-bottom:0.5rem; }
 .seats.low{ color:var(--coral-warn); font-weight:600; }
 .select-btn{
@@ -564,12 +570,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       <div class="why-stats">
         <div class="why-stat"><div class="n mono">15&ndash;25%</div><div class="d">what other booking platforms already charge operators, on every seat</div></div>
         <div class="why-stat"><div class="n mono">$0</div><div class="d">what it costs an operator to list with us</div></div>
-        <div class="why-stat"><div class="n mono">1 in 4</div><div class="d">listings right now are priced below calling direct &mdash; the rest match it exactly, never more</div></div>
+        <div class="why-stat"><div class="n mono">5 of 18</div><div class="d">listings live right now are priced below calling direct &mdash; the rest match it exactly, never more</div></div>
       </div>
     </div>
   </div>
-
-  <div class="road-divider" aria-hidden="true"></div>
 
   <div class="section tight">
     <div class="section-intro">
@@ -593,7 +597,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   </div>
 
   <footer class="site-footer">
-    <span>&copy; Wayfare</span>
+    <span>&copy; Wayfare &mdash; built by two people tired of calling wine country shuttles one at a time.</span>
     <span>Book a ride &middot; For operators &middot; Help &middot; Contact</span>
   </footer>
 </div>
@@ -673,14 +677,14 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
             <ul>
               <li>Riders can&rsquo;t find you unless they already know your name</li>
               <li>Other platforms take 15&ndash;25% on <i>every</i> seat, not just the empty ones</li>
-              <li>Empty seats on a run are pure lost revenue</li>
+              <li>That empty seat leaves the lot at 6am whether or not anyone paid for it</li>
             </ul>
           </div>
           <div class="good">
             <span class="label">With Wayfare</span>
             <ul>
               <li>Listed alongside every operator on your corridor</li>
-              <li>No monthly fee, no cost to list</li>
+              <li>No monthly fee, no cost to list &mdash; we only make money when you do</li>
               <li>Discount applies only to seats you flag as extra capacity, and you keep 100% of your normal rate on the rest</li>
             </ul>
           </div>
@@ -730,7 +734,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
         <div class="op-form-confirm" id="opFormConfirm">
           <div class="check">&#10003;</div>
           <h3 id="opConfirmName">Thanks!</h3>
-          <p>We&rsquo;ll reach out within a few days to talk rates and get your route listed.</p>
+          <p>We&rsquo;ll reach out within a couple of business days &mdash; a real person, not a ticket queue.</p>
         </div>
       </div>
     </div>
@@ -777,8 +781,8 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   var PLACES_FROM = ['Napa Valley, CA','South Lake Tahoe, CA','Davis, CA','Santa Cruz, CA','Mammoth Lakes, CA'];
 
   var CORRIDORS = [
-    { key:'napa', name:'Napa & Sonoma', sub:'wine country → SFO/OAK/SJC', tag:'Tier 1', from:'Napa Valley, CA', to:'SFO airport' },
-    { key:'tahoe', name:'Lake Tahoe', sub:'alpine belt → Reno airport', tag:'Tier 1', from:'South Lake Tahoe, CA', to:'Reno-Tahoe airport' },
+    { key:'napa', name:'Napa & Sonoma', sub:'Wine-country vans that make this SFO run every morning with room to spare.', tag:'Tier 1', from:'Napa Valley, CA', to:'SFO airport' },
+    { key:'tahoe', name:'Lake Tahoe', sub:'Ski season or not, these vans go up the hill daily — we just caught the empty seats.', tag:'Tier 1', from:'South Lake Tahoe, CA', to:'Reno-Tahoe airport' },
     { key:'sac', name:'Sacramento Valley', sub:'Davis & Chico → SMF', tag:'Tier 2', from:'Davis, CA', to:'Sacramento airport' },
     { key:'coast', name:'Central Coast', sub:'Santa Cruz, SLO, Isla Vista', tag:'Tier 2', from:'Santa Cruz, CA', to:'San Jose airport' },
     { key:'sierra', name:'Eastern Sierra', sub:'Mammoth & Bishop gateway', tag:'Tier 2', from:'Mammoth Lakes, CA', to:'Mammoth Yosemite airport' }
@@ -889,8 +893,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   // corridor chips (landing)
   var chipsEl = document.getElementById('corridorChips');
   chipsEl.innerHTML = CORRIDORS.map(function(c){
-    var tagClass = c.tag === 'Tier 1' ? 'tag stamp-rotate' : 'tag';
-    return '<div class="chip clickable" data-from="' + c.from + '" data-to="' + c.to + '">' + c.name +
+    var isTier1 = c.tag === 'Tier 1';
+    var tagClass = isTier1 ? 'tag stamp-rotate' : 'tag';
+    var chipClass = 'chip clickable' + (isTier1 ? ' tier1' : '');
+    return '<div class="' + chipClass + '" data-from="' + c.from + '" data-to="' + c.to + '">' + c.name +
       '<span>' + c.sub + '</span><span class="' + tagClass + '">' + c.tag + '</span></div>';
   }).join('');
 
