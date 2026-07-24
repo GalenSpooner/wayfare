@@ -159,7 +159,7 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 /* ==================== LANDING VIEW ==================== */
 #view-landing .hero{
   max-width:1180px; margin:0 auto; padding:3.4rem 1.5rem 1.6rem;
-  display:grid; grid-template-columns:1.1fr 0.95fr; gap:2.8rem; align-items:center;
+  display:grid; grid-template-columns:1.1fr 0.95fr; gap:2.8rem; align-items:start;
 }
 #view-landing .hero-copy{ text-align:left; }
 #view-landing .hero .eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); margin-bottom:1rem; }
@@ -170,12 +170,10 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 }
 #view-landing .hero p{ font-size:1.06rem; color:var(--ink-soft); max-width:42ch; margin:0; }
 #view-landing .hero-search .search-panel{ margin:0 0 0.9rem; max-width:none; }
-#view-landing .hero-note{ font-size:0.8rem; color:var(--ink-faint); text-align:center; }
+#view-landing .hero-note{ font-size:0.8rem; color:var(--ink-faint); text-align:left; }
 #view-landing .hero-note b{ color:var(--ink-soft); }
-@media (max-width:900px){
-  #view-landing .hero{ grid-template-columns:1fr; text-align:center; padding-top:2.8rem; }
-  #view-landing .hero-copy{ text-align:center; }
-  #view-landing .hero p{ margin:0 auto; }
+@media (max-width:640px){
+  #view-landing .hero{ grid-template-columns:1fr; padding-top:2.8rem; }
 }
 
 .section{ max-width:960px; margin:0 auto; padding:3.2rem 1.5rem; }
@@ -192,14 +190,15 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 
 .stamp-rotate{ display:inline-block; transform:rotate(-4deg); }
 
-.product-preview{ display:grid; grid-template-columns:1.3fr 1fr; gap:2.2rem; align-items:center; max-width:940px; margin:0 auto; }
-.product-preview .result{ margin-bottom:0; cursor:default; }
-.product-preview .result:hover{ transform:none; }
-.preview-notes{ display:flex; flex-direction:column; gap:1.1rem; }
-.preview-notes .note{ display:flex; gap:0.7rem; align-items:flex-start; }
-.preview-notes .note .dot-mark{ width:0.5rem; height:0.5rem; border-radius:50%; background:var(--coral); margin-top:0.5rem; flex:none; }
-.preview-notes .note p{ margin:0; font-size:0.92rem; color:var(--ink-soft); }
-.preview-notes .note b{ color:var(--ink); }
+.hero-preview{ margin-bottom:0.9rem; }
+.hero-preview-label{ font-size:0.74rem; font-weight:700; color:var(--ink-faint); margin-bottom:0.5rem; }
+.hero-preview .result{
+  display:flex; flex-direction:column; align-items:stretch; gap:0.8rem;
+  margin-bottom:0; cursor:default;
+}
+.hero-preview .result:hover{ transform:none; }
+.hero-preview .timeline{ text-align:left; min-width:0; }
+.hero-preview .price-block{ text-align:left; min-width:0; }
 
 .why-panel{ display:grid; grid-template-columns:1.3fr 1fr; gap:2rem; align-items:center; background:var(--card); border-radius:22px; box-shadow:var(--shadow-card); padding:2.2rem; }
 .why-panel h3{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.7rem; margin:0 0 0.7rem; }
@@ -444,7 +443,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 }
 .checkout-field input:focus{ outline:2px solid var(--coral); outline-offset:1px; }
 .checkout-row2{ display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; }
-.checkout-note{ font-size:0.72rem; color:var(--ink-faint); text-align:center; margin-top:0.3rem; }
+.checkout-note{
+  font-size:0.7rem; color:var(--ink-faint); text-align:center; font-style:italic;
+  margin-top:0.9rem; padding-top:0.7rem; border-top:1px dashed var(--rule);
+}
 .confirm-btn{
   margin-top:0.5rem; background:var(--coral); color:#fff; border:none; border-radius:14px; font-weight:700;
   font-size:0.94rem; padding:0.8rem 1.2rem; box-shadow:0 4px 0 var(--coral-deep);
@@ -527,37 +529,27 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
         </div>
         <div class="search-inline-note" id="lInlineNote"></div>
       </div>
+      <div class="hero-preview">
+        <div class="hero-preview-label">This is what you&rsquo;ll actually see &mdash; a real listing, not a mockup</div>
+        <div class="result featured" aria-hidden="true">
+          <div class="op-block">
+            <div class="op-top"><span class="op-name">Veterans Airporter</span><span class="badge best stamp-rotate">🏆 Best value</span></div>
+            <div class="op-type">Shared shuttle van</div>
+            <div class="op-meta"><span class="stars">★★★★★</span><span>4.8 (612)</span><span class="dot">&middot;</span><span>10-seat van</span></div>
+          </div>
+          <div class="timeline">
+            <div class="times mono">6:15a <span class="arrow">&rarr;</span> 7:35a</div>
+            <div class="duration">80 min &middot; Direct</div>
+          </div>
+          <div class="price-block">
+            <div class="price">$34</div>
+            <div class="price-note">$4 less than calling direct</div>
+            <div class="seats mono">6 seats left</div>
+            <button class="select-btn" tabindex="-1">Select</button>
+          </div>
+        </div>
+      </div>
       <div class="hero-note"><b>No account needed to search.</b> Real prices, before you book, every time.</div>
-    </div>
-  </div>
-
-  <div class="section" style="padding-top:2.6rem;">
-    <div class="section-head">
-      <h2>This is what you&rsquo;ll actually see.</h2>
-    </div>
-    <div class="product-preview">
-      <div class="result featured" aria-hidden="true">
-        <div class="op-block">
-          <div class="op-top"><span class="op-name">Veterans Airporter</span><span class="badge best stamp-rotate">🏆 Best value</span></div>
-          <div class="op-type">Shared shuttle van</div>
-          <div class="op-meta"><span class="stars">★★★★★</span><span>4.8 (612)</span><span class="dot">&middot;</span><span>10-seat van</span></div>
-        </div>
-        <div class="timeline">
-          <div class="times mono">6:15a <span class="arrow">&rarr;</span> 7:35a</div>
-          <div class="duration">80 min &middot; Direct</div>
-        </div>
-        <div class="price-block">
-          <div class="price">$34</div>
-          <div class="price-note">$4 less than calling direct</div>
-          <div class="seats mono">6 seats left</div>
-          <button class="select-btn" tabindex="-1">Select</button>
-        </div>
-      </div>
-      <div class="preview-notes">
-        <div class="note"><span class="dot-mark"></span><p><b>Real operator, real rating.</b> Pulled from the same list riders search, not a mockup.</p></div>
-        <div class="note"><span class="dot-mark"></span><p><b>Price vs. calling direct, shown plainly.</b> No guessing why one option costs less.</p></div>
-        <div class="note"><span class="dot-mark"></span><p><b>Live seat count.</b> What&rsquo;s actually left on that run, not a stale estimate.</p></div>
-      </div>
     </div>
   </div>
 
@@ -759,9 +751,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
         <form class="checkout-form" id="checkoutForm">
           <div class="checkout-field"><label>Full name</label><input type="text" id="ckName" placeholder="Jamie Rivera" required /></div>
           <div class="checkout-field"><label>Email</label><input type="email" id="ckEmail" placeholder="jamie@email.com" required /></div>
+          <div class="checkout-field"><label>Card number</label><input type="text" id="ckCard" placeholder="4242 4242 4242 4242" required /></div>
           <div class="checkout-row2">
-            <div class="checkout-field"><label>Card number</label><input type="text" id="ckCard" placeholder="4242 4242 4242 4242" required /></div>
             <div class="checkout-field"><label>Expiry</label><input type="text" id="ckExp" placeholder="MM / YY" required /></div>
+            <div class="checkout-field"><label>CVV</label><input type="text" id="ckCvv" placeholder="123" required /></div>
           </div>
           <button type="submit" class="confirm-btn" id="confirmBtn">Confirm booking</button>
           <div class="checkout-note">Demo only &mdash; no real payment is processed.</div>
