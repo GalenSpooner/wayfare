@@ -213,6 +213,18 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
 .why-stat .n{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:1.7rem; color:var(--price); line-height:1; }
 .why-stat .d{ font-size:0.78rem; color:var(--ink-soft); margin-top:0.25rem; }
 
+.corridor-map-wrap{
+  background:var(--card); border-radius:20px; box-shadow:var(--shadow-card);
+  padding:1.2rem; margin-bottom:1rem; display:flex; justify-content:center;
+}
+.corridor-map{ width:100%; max-width:300px; height:auto; }
+.map-land{ fill:var(--bg); stroke:var(--ink-faint); stroke-width:2.5; }
+.map-route{ fill:none; stroke-width:2; stroke-linecap:round; }
+.map-point circle{ stroke:var(--card); stroke-width:1.5; }
+.map-point text{
+  font-size:8px; font-weight:700; fill:var(--ink-soft); font-family:'Helvetica Neue',Arial,sans-serif;
+}
+
 .corridor-chips{ display:flex; flex-wrap:wrap; gap:0.7rem; justify-content:flex-start; }
 .chip{
   background:var(--card); border-radius:18px; box-shadow:var(--shadow-card); padding:0.7rem 1.2rem;
@@ -227,9 +239,28 @@ a{ color:inherit; text-decoration:none; cursor:pointer; }
   display:inline-block; margin-top:0.4rem; font-size:0.62rem; font-weight:700; text-transform:uppercase;
   letter-spacing:0.04em; padding:0.15rem 0.5rem; border-radius:100px; background:var(--sky-soft); color:var(--sky-ink);
 }
+.chip.has-photo{
+  position:relative; overflow:hidden; min-height:168px; display:flex; flex-direction:column; justify-content:flex-end;
+  background-size:cover; background-position:center; padding:1rem 1.1rem;
+}
+.chip.has-photo::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(16,42,38,0.1) 0%, rgba(16,42,38,0.88) 100%);
+}
+.chip.has-photo > *{ position:relative; z-index:1; }
+.chip.has-photo{ color:#fff; }
+.chip.has-photo span{ color:rgba(255,255,255,0.82); }
+.chip.has-photo .tag{ background:rgba(255,255,255,0.22); color:#fff; }
 
-.operator-band{ background:var(--ink-fixed); color:var(--onink-fixed); border-radius:26px; max-width:960px; margin:1rem auto 0; }
-.operator-band .inner{ padding:2.6rem 2.2rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+.operator-band{
+  background:var(--ink-fixed) url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/2010_Mercedes-Benz_Sprinter_2500_Passenger_Van_%28W906%29.jpg/1280px-2010_Mercedes-Benz_Sprinter_2500_Passenger_Van_%28W906%29.jpg") center 30%/cover no-repeat;
+  color:var(--onink-fixed); border-radius:26px; max-width:960px; margin:1rem auto 0; position:relative; overflow:hidden;
+}
+.operator-band::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(100deg, rgba(16,42,38,0.97) 0%, rgba(16,42,38,0.95) 38%, rgba(16,42,38,0.6) 100%);
+}
+.operator-band .inner{ position:relative; z-index:1; padding:2.6rem 2.2rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
 .operator-band h2{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:clamp(1.5rem,3.4vw,2.1rem); margin:0 0 0.5rem; color:var(--onink-fixed); }
 .operator-band p{ font-size:0.92rem; color:var(--onink-fixed); opacity:0.75; margin:0; max-width:44ch; }
 .operator-btn{
@@ -364,6 +395,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
 #view-operator .op-eyebrow{ font-size:0.78rem; font-weight:700; color:var(--coral-ink); margin-bottom:0.8rem; }
 #view-operator h1{ font-family:'Fraunces',system-ui,sans-serif; font-weight:700; font-size:clamp(1.9rem,5.6vw,2.5rem); line-height:1.08; margin:0 0 0.9rem; text-wrap:balance; color:var(--ink); }
 #view-operator .op-dek{ font-size:1.02rem; color:var(--ink-soft); max-width:52ch; margin:0; }
+#view-operator .op-founder-note{ font-size:0.82rem; font-style:italic; color:var(--ink-faint); max-width:52ch; margin:0.7rem 0 0; }
 
 #view-operator .op-section{ padding:1.7rem 2rem; border-top:1px solid var(--rule); }
 #view-operator .op-section h2{ font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 1.1rem; }
@@ -583,6 +615,13 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
       </div>
       <span class="sub">Tap a corridor to search it directly &rarr;</span>
     </div>
+    <div class="corridor-map-wrap">
+      <svg class="corridor-map" viewBox="0 0 320 400" role="img" aria-label="Simplified map of Northern California showing the five Wayfare corridors">
+        <path class="map-land" d="M70,15 L55,60 Q45,90 55,120 Q75,148 66,165 L50,200 Q40,240 55,270 L45,310 Q50,345 75,360 L100,375 L170,378 L235,345 Q265,300 270,250 Q275,190 265,140 Q255,90 235,55 L190,20 Z"/>
+        <g id="mapRoutes"></g>
+        <g id="mapPoints"></g>
+      </svg>
+    </div>
     <div class="corridor-chips" id="corridorChips"></div>
   </div>
 
@@ -667,6 +706,7 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
         <div class="op-eyebrow">FOR SHUTTLE &amp; VAN OPERATORS</div>
         <h1>Fill the seats you&rsquo;d run empty anyway.</h1>
         <p class="op-dek">Wayfare brings riders to your existing routes. You keep your normal rate on every seat you&rsquo;d fill regardless <span class="aside">&mdash; we only ask for a discount on the ones that would&rsquo;ve gone out empty.</span></p>
+        <p class="op-founder-note">Built by two people who got tired of calling shuttle companies one at a time &mdash; now we bring the calls to you.</p>
       </div>
 
       <div class="op-section">
@@ -781,8 +821,10 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   var PLACES_FROM = ['Napa Valley, CA','South Lake Tahoe, CA','Davis, CA','Santa Cruz, CA','Mammoth Lakes, CA'];
 
   var CORRIDORS = [
-    { key:'napa', name:'Napa & Sonoma', sub:'Wine-country vans that make this SFO run every morning with room to spare.', tag:'Tier 1', from:'Napa Valley, CA', to:'SFO airport' },
-    { key:'tahoe', name:'Lake Tahoe', sub:'Ski season or not, these vans go up the hill daily — we just caught the empty seats.', tag:'Tier 1', from:'South Lake Tahoe, CA', to:'Reno-Tahoe airport' },
+    { key:'napa', name:'Napa & Sonoma', sub:'Wine-country vans that make this SFO run every morning with room to spare.', tag:'Tier 1', from:'Napa Valley, CA', to:'SFO airport',
+      photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/NorCal2018_-005_Wine_Country_-_Random_Napa_Valley_Vineyard_on_the_side_of_a_road_-S0292033.jpg/1280px-NorCal2018_-005_Wine_Country_-_Random_Napa_Valley_Vineyard_on_the_side_of_a_road_-S0292033.jpg' },
+    { key:'tahoe', name:'Lake Tahoe', sub:'Ski season or not, these vans go up the hill daily — we just caught the empty seats.', tag:'Tier 1', from:'South Lake Tahoe, CA', to:'Reno-Tahoe airport',
+      photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/South_Lake_Tahoe%2C_Nevada_%2821572265225%29.jpg/1280px-South_Lake_Tahoe%2C_Nevada_%2821572265225%29.jpg' },
     { key:'sac', name:'Sacramento Valley', sub:'Davis & Chico → SMF', tag:'Tier 2', from:'Davis, CA', to:'Sacramento airport' },
     { key:'coast', name:'Central Coast', sub:'Santa Cruz, SLO, Isla Vista', tag:'Tier 2', from:'Santa Cruz, CA', to:'San Jose airport' },
     { key:'sierra', name:'Eastern Sierra', sub:'Mammoth & Bishop gateway', tag:'Tier 2', from:'Mammoth Lakes, CA', to:'Mammoth Yosemite airport' }
@@ -895,10 +937,45 @@ footer.site-footer{ max-width:960px; margin:0 auto; padding:2.4rem 1.5rem 3rem; 
   chipsEl.innerHTML = CORRIDORS.map(function(c){
     var isTier1 = c.tag === 'Tier 1';
     var tagClass = isTier1 ? 'tag stamp-rotate' : 'tag';
-    var chipClass = 'chip clickable' + (isTier1 ? ' tier1' : '');
-    return '<div class="' + chipClass + '" data-from="' + c.from + '" data-to="' + c.to + '">' + c.name +
+    var chipClass = 'chip clickable' + (isTier1 ? ' tier1' : '') + (c.photo ? ' has-photo' : '');
+    var style = c.photo ? ' style="background-image:url(&quot;' + c.photo + '&quot;)"' : '';
+    return '<div class="' + chipClass + '" data-from="' + c.from + '" data-to="' + c.to + '"' + style + '>' + c.name +
       '<span>' + c.sub + '</span><span class="' + tagClass + '">' + c.tag + '</span></div>';
   }).join('');
+
+  // schematic corridor map — approximate relative positions on the simplified NorCal outline
+  var MAP_POINTS = {
+    'Napa Valley, CA':          { x: 98,  y: 108, label: 'Napa' },
+    'SFO airport':              { x: 90,  y: 154, label: 'SF Bay Area' },
+    'South Lake Tahoe, CA':     { x: 205, y: 150, label: 'Lake Tahoe' },
+    'Reno-Tahoe airport':       { x: 252, y: 140, label: 'Reno' },
+    'Davis, CA':                { x: 136, y: 126, label: 'Davis' },
+    'Sacramento airport':       { x: 152, y: 106, label: 'Sacramento' },
+    'Santa Cruz, CA':           { x: 68,  y: 218, label: 'Santa Cruz' },
+    'San Jose airport':         { x: 102, y: 164, label: null },
+    'Mammoth Lakes, CA':        { x: 212, y: 254, label: 'Mammoth Lakes' },
+    'Mammoth Yosemite airport': { x: 230, y: 274, label: null }
+  };
+  var MAP_COLORS = ['var(--coral)', 'var(--price)'];
+  var mapRoutesEl = document.getElementById('mapRoutes');
+  var mapPointsEl = document.getElementById('mapPoints');
+  var seenPoints = {};
+  var routesSvg = '', pointsSvg = '';
+  CORRIDORS.forEach(function(c, i){
+    var a = MAP_POINTS[c.from], b = MAP_POINTS[c.to];
+    if(!a || !b) return;
+    var color = MAP_COLORS[i % MAP_COLORS.length];
+    routesSvg += '<line class="map-route" x1="' + a.x + '" y1="' + a.y + '" x2="' + b.x + '" y2="' + b.y + '" stroke="' + color + '"></line>';
+    [a, b].forEach(function(p){
+      var key = p.x + ',' + p.y;
+      if(seenPoints[key]) return;
+      seenPoints[key] = true;
+      pointsSvg += '<g class="map-point"><circle cx="' + p.x + '" cy="' + p.y + '" r="3.5" fill="' + color + '"></circle>' +
+        (p.label ? '<text x="' + (p.x + 6) + '" y="' + (p.y + 3) + '">' + p.label + '</text>' : '') + '</g>';
+    });
+  });
+  mapRoutesEl.innerHTML = routesSvg;
+  mapPointsEl.innerHTML = pointsSvg;
 
   // empty-state quick chips (results)
   var emptyChipsEl = document.getElementById('emptyStateChips');
